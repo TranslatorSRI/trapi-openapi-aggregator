@@ -4,7 +4,7 @@ Open api proxy server to aggregate specs of similar infores and trapi versions i
 
 ### Usage
 
-Create or Edit `server.json` with list of servers 
+Create or Edit `servers.json` with list of servers 
 ```json
 ["https://automat.ci.transltr.io/ctd/1.3/openapi.json",
  "https://automat.test.transltr.io/ctd/1.3/openapi.json",
