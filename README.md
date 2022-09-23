@@ -28,5 +28,5 @@ uvicorn --port 8080 src.server:app
 ##### Docker
 Run via docker run 
 ```bash
-docker run --rm --name agg-server -p 8080:8080 -v server.json:/code/server.json ghcr.io/translatorsri/trapi-openapi-aggregator:latest
+docker run --rm --name agg-server -p 8080:8080 -v servers.json:/code/server.json ghcr.io/translatorsri/trapi-openapi-aggregator:latest
 ```
