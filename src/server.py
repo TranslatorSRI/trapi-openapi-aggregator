@@ -1,9 +1,11 @@
 import fastapi
 from src.aggregator import merge_specs, server_list, get_available_servers
-import asyncio
 import uvicorn
 
-app = fastapi.FastAPI()
+app = fastapi.FastAPI(
+    title="🧮 Trapi Openapi Aggregator",
+    description="Proxy server for openapi docs for Translator api services."
+)
 
 all_specs = merge_specs(server_list)
 
@@ -27,4 +29,4 @@ async def get_all_servers():
     return get_available_servers(all_specs)
 
 if __name__ == '__main__':
-    uvicorn.run(app,port=7878)
+    uvicorn.run(app, port=7878)
