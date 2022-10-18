@@ -78,7 +78,11 @@ def get_spec(url):
 
 def get_yaml_spec(url):
     with httpx.Client() as client:
-        response =  client.get(url)
+        try:
+            response = client.get(url, timeout=3)
+        except Exception as ex:
+            logger.error(f"Exception {ex} reading from {url}")
+            return {}
         if response.status_code == 200:
             return yaml.load(response.text, Loader=yaml.FullLoader)
         else:
@@ -89,9 +93,9 @@ def get_yaml_spec(url):
 def get_json_spec(url):
     with httpx.Client() as client:
         try:
-            response = client.get(url)
+            response = client.get(url, timeout=3)
         except Exception as ex:
-            logger.error(f"Exception {ex.with_traceback()} reading from {url}")
+            logger.error(f"Exception {ex} reading from {url}")
             return {}
         if response.status_code == 200:
             return response.json()
