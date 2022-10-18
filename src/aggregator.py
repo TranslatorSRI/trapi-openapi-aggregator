@@ -51,7 +51,7 @@ def merge_specs(server_list):
                                          y + list(filter(lambda entry: entry.get('url', '').startswith('http'), x['servers'])),
                                       sub_group[info_res][trapi], []))
                 leader_spec['servers'] = servers
-                leader_spec['title'] = f"{info_res.replace('infores:', '').capitalize()} (Trapi v{trapi})"
+                leader_spec['info']['title'] = f"{info_res.replace('infores:', '').capitalize()} (Trapi v{trapi})"
                 all_specs[info_res] = all_specs.get(info_res, {})
                 all_specs[info_res][trapi] = leader_spec
         specs[comp_type] = all_specs
