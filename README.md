@@ -4,7 +4,7 @@ Open api proxy server to aggregate specs of similar infores and trapi versions i
 
 ### Usage
 
-Create or Edit `server.json` with list of servers 
+Create or Edit `servers.json` with list of servers 
 ```json
 ["https://automat.ci.transltr.io/ctd/1.3/openapi.json",
  "https://automat.test.transltr.io/ctd/1.3/openapi.json",
@@ -28,5 +28,5 @@ uvicorn --port 8080 src.server:app
 ##### Docker
 Run via docker run 
 ```bash
-docker run --rm --name agg-server -p 8080:8080 -v server.json:/code/server.json ghcr.io/translatorsri/trapi-openapi-aggregator:latest
+docker run --rm --name agg-server -p 8080:8080 -v servers.json:/code/server.json ghcr.io/translatorsri/trapi-openapi-aggregator:latest
 ```
