@@ -13,6 +13,12 @@ logger = logging.getLogger()
 with open(os.path.join(pathlib.Path(__file__).parent.resolve(), '..', 'servers.json')) as stream:
     server_list = json.load(stream)
 
+with open(os.path.join(pathlib.Path(__file__).parent.resolve(), '..', 'infores-override.json')) as stream:
+    txt = stream.read()
+    infores_override = {}
+    if txt:
+        infores_override = json.loads(txt)
+
 
 def merge_specs(server_list):
     grouped = {'trapi': {}, 'utility': {}}
@@ -51,7 +57,8 @@ def merge_specs(server_list):
                                          y + list(filter(lambda entry: entry.get('url', '').startswith('http'), x['servers'])),
                                       sub_group[info_res][trapi], []))
                 leader_spec['servers'] = servers
-                leader_spec['info']['title'] = f"{info_res.replace('infores:', '').capitalize()} (Trapi v{trapi})"
+                leader_spec['info']['title'] = infores_override.get(info_res)  if infores_override.get(info_res) else \
+                    f"{info_res.replace('infores:', '').capitalize()}" + ( f"(Trapi v{trapi})" if trapi.lower() != comp_type.lower() else "")
                 all_specs[info_res] = all_specs.get(info_res, {})
                 all_specs[info_res][trapi] = leader_spec
         specs[comp_type] = all_specs
