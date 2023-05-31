@@ -59,6 +59,10 @@ def merge_specs(server_list):
                 leader_spec['servers'] = servers
                 leader_spec['info']['title'] = infores_override.get(info_res)  if infores_override.get(info_res) else \
                     f"{info_res.replace('infores:', '').capitalize()}" + ( f"(Trapi v{trapi})" if trapi.lower() != comp_type.lower() else "")
+                operations = leader_spec['info'].get('x-trapi').get('operations')
+                if operations:
+                    operations = [x for x in operations if x != "filter_message_top_n"]
+                    leader_spec['info']['x-trapi']['operations'] = operations
                 all_specs[info_res] = all_specs.get(info_res, {})
                 all_specs[info_res][trapi] = leader_spec
         specs[comp_type] = all_specs
